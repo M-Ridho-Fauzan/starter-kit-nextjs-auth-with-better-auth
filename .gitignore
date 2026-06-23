@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Next.js
+.next/
+out/
+build/
+
+# Environment variables — JANGAN PERNAH di-commit
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Yang boleh di-commit
+# .env.example ← ini TIDAK di-ignore, memang harus ada di repo
+
+# Prisma
+prisma/migrations/dev/
+*.db
+*.db-journal
+
+# Testing
+coverage/
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Misc
+.vercel
