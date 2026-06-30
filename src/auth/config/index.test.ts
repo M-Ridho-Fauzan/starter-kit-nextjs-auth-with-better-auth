@@ -74,7 +74,7 @@ describe("defineAuthConfig", () => {
   it("throws on invalid database adapter", () => {
     expect(() =>
       defineAuthConfig({
-        database: { adapter: "mongodb" as never },
+        database: { adapter: "mongodb" as never, url: "postgresql://localhost/db" },
       }),
     ).toThrow();
   });

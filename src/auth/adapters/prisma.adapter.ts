@@ -47,7 +47,12 @@ export function createPrismaAdapter(config: DatabaseConfig): unknown {
 function createPrismaClient(url?: string): PrismaClientLike {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const { PrismaClient } = require("@prisma/client") as {
-    PrismaClient: new (options?: { datasourceUrl?: string }) => PrismaClientLike;
+    PrismaClient: new (options: { adapter: unknown }) => PrismaClientLike;
   };
-  return new PrismaClient({ datasourceUrl: url });
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const { PrismaPg } = require("@prisma/adapter-pg") as {
+    PrismaPg: new (url: string) => unknown;
+  };
+  const adapter = new PrismaPg(url!);
+  return new PrismaClient({ adapter });
 }

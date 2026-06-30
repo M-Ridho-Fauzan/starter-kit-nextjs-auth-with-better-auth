@@ -26,16 +26,16 @@ async function callMiddleware(url: string): Promise<{
   status: number;
   location: string | null;
 }> {
-  const { middleware } = await import("./middleware");
+  const { proxy } = await import("./proxy");
   const request = new NextRequest(new Request(url));
-  const response = await middleware(request);
+  const response = await proxy(request);
   return {
     status: response.status,
     location: response.headers.get("location"),
   };
 }
 
-describe("middleware", () => {
+describe("proxy", () => {
   beforeEach(() => {
     mockGetSession.mockReset();
   });

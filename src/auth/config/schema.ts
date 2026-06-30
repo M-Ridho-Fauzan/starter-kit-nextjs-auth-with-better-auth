@@ -37,11 +37,22 @@ export const EmailConfig = z.object({
 
 export const DatabaseAdapter = z.enum(["prisma", "drizzle", "kysely", "mongoose"]);
 
-export const DatabaseConfig = z.object({
-  adapter: DatabaseAdapter,
-  url: z.string().optional(),
-  client: z.unknown().optional(),
-});
+export const DatabaseConfig = z
+  .object({
+    adapter: DatabaseAdapter,
+    url: z.string(),
+    client: z.unknown().optional(),
+  })
+  .superRefine((data, ctx) => {
+    if (!data.url && !data.client) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message:
+          "Either `url` or `client` is required in `database` config.",
+        path: ["url"],
+      });
+    }
+  });
 
 // ─── Session Section ───
 
@@ -77,8 +88,8 @@ export const PasswordResetConfig = z
 
 export const OAuthProviderConfig = z.object({
   enabled: z.boolean().default(false),
-  clientId: z.string(),
-  clientSecret: z.string(),
+  clientId: z.string().optional().default(""),
+  clientSecret: z.string().optional().default(""),
 });
 
 export const OAuthConfig = z.object({

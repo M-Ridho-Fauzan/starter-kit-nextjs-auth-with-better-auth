@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 interface AuthLayoutProps {
   title: string;
   description?: string;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 /**
@@ -23,7 +23,7 @@ export function AuthLayout({ title, description, children }: AuthLayoutProps) {
             <p className="text-muted-foreground text-sm">{description}</p>
           )}
         </CardHeader>
-        <CardContent>{children}</CardContent>
+        {children && <CardContent>{children}</CardContent>}
       </Card>
     </div>
   );

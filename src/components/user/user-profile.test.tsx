@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
@@ -12,16 +12,6 @@ vi.mock("@/auth/auth-client", () => ({
 const mockUseStore = vi.fn();
 vi.mock("@nanostores/react", () => ({
   useStore: (...args: unknown[]) => mockUseStore(...args),
-}));
-
-vi.mock("../../../auth.config", () => ({
-  default: {
-    ui: {
-      redirectAfterLogin: "/dashboard",
-      redirectAfterLogout: "/login",
-      twoFactorSettingsPath: "/settings/2fa",
-    },
-  },
 }));
 
 const mockPush = vi.fn();

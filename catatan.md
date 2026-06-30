@@ -2,9 +2,12 @@
 
 ## Catatan sesi percakapan
 
-### sesi tgl 22 june 2026
+### sesi tgl 22 june 2026 (sesion public/shared)
 
-opencode -s ses_1130e160affeT25byvoI78ISua
+- `opencode -s ses_1130e160affeT25byvoI78ISua`
+- [link shared](https://opncd.ai/share/oI78ISua).
+
+- `opencode -s ses_10bea5c92ffeY1UcpkCj5qgL1T`
 
 ## instruction fo clude workflow
 

@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import config from "../../../auth.config";
 
 /**
  * Avatar fallback — renders initials when no profile image is available.
@@ -31,12 +30,25 @@ function AvatarFallback({ name }: { name: string }) {
 }
 
 /**
+ * Props for the {@link UserProfile} component.
+ */
+export interface UserProfileProps {
+  /**
+   * Base path for two-factor settings (default: `/settings/2fa`).
+   * The full page at this path must be implemented by the consuming app.
+   */
+  twoFactorSettingsPath?: string;
+}
+
+/**
  * User profile card.
  *
  * Displays the authenticated user's name, email, role badge, and links to
  * 2FA settings and sign-out. Returns null when no user is logged in.
  */
-export function UserProfile() {
+export function UserProfile({
+  twoFactorSettingsPath = "/settings/2fa",
+}: UserProfileProps = {}) {
   const { user } = useAuth();
   const role = useRole();
   const router = useRouter();
@@ -77,7 +89,7 @@ export function UserProfile() {
           <Button
             variant="outline"
             className="w-full justify-start"
-            onClick={() => router.push(config.ui.twoFactorSettingsPath)}
+            onClick={() => router.push(twoFactorSettingsPath)}
           >
             Two-factor settings
           </Button>

@@ -76,7 +76,7 @@ export async function verifyTotpAction(
     };
   }
 
-  redirect("/dashboard");
+  redirect("/dashboard"); // TODO: read from auth.config.ts ui.redirectAfterLogin
 }
 
 /**

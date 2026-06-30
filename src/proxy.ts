@@ -6,11 +6,10 @@ import authConfig from "../auth.config";
 const LOGIN_PATH = authConfig.ui.redirectAfterLogout;
 const DEFAULT_AUTH_PATH = authConfig.ui.redirectAfterLogin;
 const protectedPaths: string[] = authConfig.ui.protectedPaths;
-const roleRestrictions: Record<string, string[]> = authConfig.ui.roleRestrictions;
+const roleRestrictions: Record<string, string[]> =
+  authConfig.ui.roleRestrictions;
 
-export const runtime = "nodejs";
-
-export async function middleware(request: NextRequest): Promise<NextResponse> {
+export async function proxy(request: NextRequest): Promise<NextResponse> {
   const pathname = request.nextUrl.pathname;
 
   const isProtected = protectedPaths.some((p) => pathname.startsWith(p));

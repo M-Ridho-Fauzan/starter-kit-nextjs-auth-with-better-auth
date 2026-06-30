@@ -5,10 +5,33 @@
  * All values flow from here — zero hardcoding in the source.
  *
  * @see https://opencode.ai/docs/auth-config
+ *
+ * ─── Email Provider Setup ───
+ *
+ * The `email` section allows you to send real emails. By default, emails
+ * are logged to the console in development. To send real emails:
+ *
+ * 1. Pick a provider (e.g. Resend, Nodemailer, SendGrid)
+ * 2. Install the provider package:
+ *    - Resend:  pnpm add resend
+ *    - Nodemailer: pnpm add nodemailer @types/nodemailer
+ * 3. Uncomment and update the callbacks below
  */
 import { defineAuthConfig } from "@/auth/config";
 
 export default defineAuthConfig({
+  /*
+   * Email provider callbacks.
+   *
+   * By default, emails are logged to the console in development.
+   * To send real emails, uncomment and configure the callbacks below.
+   *
+   * @example
+   * ```ts
+   * import { Resend } from "resend";
+   * const resend = new Resend(process.env.RESEND_API_KEY!);
+   * ```
+   */
   database: {
     adapter: "prisma",
     url: process.env.DATABASE_URL!,
@@ -16,15 +39,15 @@ export default defineAuthConfig({
   features: {
     emailPassword: {
       enabled: true,
-      requireEmailVerification: true,
+      requireEmailVerification: false,
       passwordMinLength: 8,
     },
     passwordReset: true,
     oauth: {
       github: {
-        enabled: true,
-        clientId: process.env.GITHUB_CLIENT_ID!,
-        clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+        enabled: false,
+        clientId: process.env.GITHUB_CLIENT_ID ?? "",
+        clientSecret: process.env.GITHUB_CLIENT_SECRET ?? "",
       },
       google: {
         enabled: false,

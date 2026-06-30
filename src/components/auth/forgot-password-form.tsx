@@ -4,6 +4,7 @@ import { useForgotPasswordForm } from "@/hooks/use-forgot-password";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Link from "next/link";
 
 /**
  * Forgot password form.
@@ -16,20 +17,30 @@ export function ForgotPasswordForm() {
   const [state, formAction, pending] = useForgotPasswordForm();
 
   return (
-    <form action={formAction} className="space-y-4">
-      <div className="space-y-2">
-        <Label htmlFor="email">Email</Label>
-        <Input id="email" name="email" type="email" required />
-      </div>
-      {state && !state.success && (
-        <p className="text-destructive text-sm">{state.error.message}</p>
-      )}
-      {state && state.success && (
-        <p className="text-emerald-600 text-sm">{state.message}</p>
-      )}
-      <Button type="submit" disabled={pending} className="w-full">
-        {pending ? "Sending..." : "Send reset link"}
-      </Button>
-    </form>
+    <>
+      <form action={formAction} className="space-y-4">
+        <div className="space-y-2">
+          <Label htmlFor="email">Email</Label>
+          <Input id="email" name="email" type="email" required />
+        </div>
+        {state && !state.success && (
+          <p className="text-destructive text-sm">{state.error.message}</p>
+        )}
+        {state && state.success && (
+          <p className="text-emerald-600 text-sm">{state.message}</p>
+        )}
+        <Button type="submit" disabled={pending} className="w-full">
+          {pending ? "Sending..." : "Send reset link"}
+        </Button>
+      </form>
+      <p className="mt-4 text-center text-sm text-muted-foreground">
+        <Link
+          href="/login"
+          className="font-medium text-primary hover:underline"
+        >
+          Back to sign in
+        </Link>
+      </p>
+    </>
   );
 }

@@ -47,3 +47,7 @@ pnpm-debug.log*
 
 # Misc
 .vercel
+
+# Personal notes
+catatan.md
+docs/nextbeterauth-starterkit/
